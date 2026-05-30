@@ -240,10 +240,11 @@ func NewIncomingResponse(resp types.IncomingResponse) (*http.Response, error) {
 		}
 		trailersOptRes := trailersOptResRes.OK()
 		if err := trailersOptRes.Err(); err != nil {
-			return nil, fmt.Errorf("failed to getting trailers: %v", *err)
+			return nil, fmt.Errorf("failed to get trailers: %v", *err)
 		}
 		trailersOpt := trailersOptRes.OK()
 		if trailers := trailersOpt.Some(); trailers != nil {
+			trailer = make(http.Header)
 			for _, h := range trailers.Entries().Slice() {
 				k := string(h.F0)
 				trailer[k] = append(trailer[k], string(h.F1.Slice()))
