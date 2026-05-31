@@ -253,7 +253,7 @@ func NewIncomingResponse(resp types.IncomingResponse) (*http.Response, error) {
 	}
 	futTrailers.ResourceDrop()
 	return &http.Response{
-		Status:     http.StatusText(int(resp.Status())),
+		Status:     fmt.Sprintf("%d %s", int(resp.Status()), http.StatusText(int(resp.Status()))),
 		StatusCode: int(resp.Status()),
 		Body:       io.NopCloser(bytes.NewReader(buf)),
 		Header:     header,
