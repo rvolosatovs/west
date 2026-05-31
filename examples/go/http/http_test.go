@@ -27,6 +27,7 @@ func TestIncomingHandler(t *testing.T) {
 			t.Fatalf("failed to handle incoming HTTP request: %s", err)
 		}
 		assert.Equal(t, 200, resp.StatusCode)
+		assert.Equal(t, "200 OK", resp.Status)
 		assert.Equal(t, http.Header{
 			"foo": {
 				"bar",
